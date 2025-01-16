@@ -47,6 +47,22 @@ void addColumn(int**& arr, int& rows, int& cols, int pos) {
     cols++; 
 }
 
+//n2
+void removeColumn(int**& arr, int& rows, int& cols, int pos) {
+    if (pos < 0 || pos >= cols) return;
+    for (int i = 0; i < rows; i++) {
+        int* newRow = new int[cols - 1];
+        for (int j = 0,k=0; j < cols; j++) {
+            if (j != pos) newRow[k++] = arr[i][j];
+        }
+        delete[] arr[i];
+        arr[i] = newRow;
+    }
+    cols--;
+}
+
+
+
 int main()
 {
     system("chcp 1251>null");
@@ -61,11 +77,16 @@ int main()
     int** A = createArray(rowsA, colsA);
     int** B = createArray(rowsB, colsB);
     int** C = createArray(rowsC, colsC);
-    cout << "зазначена позиція додавання стовпця: ";
+    cout << "зазначена позиція додавання/видалення стовпця: ";
     cin >> num;
+    //n1
     addColumn(A, rowsA, colsA, num);
     cout << "A після додавання стовпця:" << endl;
     printArray(A, rowsA, colsA);
+    //n2
+    removeColumn(B, rowsB, colsB, num);
+    cout << "B після видалення стовпця:" << endl;
+    printArray(B, rowsB, colsB);
 
 }
 
