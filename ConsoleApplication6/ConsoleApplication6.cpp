@@ -61,7 +61,28 @@ void removeColumn(int**& arr, int& rows, int& cols, int pos) {
     cols--;
 }
 
+//n4
+vector<int> unique(int** A, int rowsA, int colsA, int** B, int rowsB, int colsB, int** C, int rowsC, int colsC) {
+    set<int> uniqueValues;
+    for (int i = 0; i < rowsA; i++)
+        for (int j = 0; j < colsA; j++)
+            uniqueValues.insert(A[i][j]);
+    for (int i = 0; i < rowsB; i++)
+        for (int j = 0; j < colsB; j++)
+            uniqueValues.insert(B[i][j]);
+    for (int i = 0; i < rowsC; i++)
+        for (int j = 0; j < colsC; j++)
+            uniqueValues.insert(C[i][j]);
+    return vector<int>(uniqueValues.begin(), uniqueValues.end());
+}
 
+void deleteArray(int**& arr, int rows) {
+    for (int i = 0; i < rows; i++) {
+        delete[] arr[i];
+    }
+    delete[] arr;
+    arr = nullptr;
+}
 
 int main()
 {
@@ -87,6 +108,15 @@ int main()
     removeColumn(B, rowsB, colsB, num);
     cout << "B після видалення стовпця:" << endl;
     printArray(B, rowsB, colsB);
+    //n4
+    vector<int> uniqueValues = unique(A, rowsA, colsA, B, rowsB, colsB, C, rowsC, colsC);
+    cout << "унікальні: "<<endl;
+    for (int i : uniqueValues) cout << i << " ";
+    cout << endl;
+
+    deleteArray(A, rowsA);
+    deleteArray(B, rowsB);
+    deleteArray(C, rowsC);
 
 }
 
